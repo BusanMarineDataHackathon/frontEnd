@@ -228,7 +228,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintHeight_percent="0.16"
+            app:layout_constraintHeight_percent="0.19"
             android:paddingVertical="15dp"
             android:paddingHorizontal="10dp"
             android:background="@drawable/rounded_corner_shape"
@@ -245,6 +245,14 @@
                 android:textColor="@color/maybeBlack"
                 android:textSize="15sp"
                 android:textStyle="bold"
+                />
+            <ImageView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon1"
+                app:layout_constraintRight_toRightOf="parent"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -275,6 +283,15 @@
                 android:textStyle="bold"
                 />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -303,6 +320,14 @@
                 android:textStyle="bold"
                 />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -329,7 +354,13 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 />
-
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -355,6 +386,14 @@
                 android:textColor="@color/maybeBlack"
                 android:textSize="15sp"
                 android:textStyle="bold"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

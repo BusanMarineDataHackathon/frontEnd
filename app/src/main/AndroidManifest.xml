@@ -12,10 +12,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Netflicks"
         tools:targetApi="31">
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="true" />
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="googleMapApiKey" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+
+
         <activity
-            android:name=".MainActivity2"
+            android:name=".ui.activity.RFIDActivity"
+            android:exported="false"
+            android:label="@string/title_activity_rfidactivity"
+            android:theme="@style/Theme.Netflicks" />
+        <activity
+            android:name=".ui.activity.MainActivity2"
             android:exported="true"
-            android:label="@string/title_activity_main2" >
+            android:label="@string/title_activity_main2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

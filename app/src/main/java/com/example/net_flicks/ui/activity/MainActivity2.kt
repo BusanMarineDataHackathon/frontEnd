@@ -1,15 +1,13 @@
-package com.example.net_flicks
+package com.example.net_flicks.ui.activity
 
 import android.os.Bundle
-import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.net_flicks.R
 import com.example.net_flicks.databinding.ActivityMain2Binding
-import com.example.net_flicks.util.setStatusBarTransparent
 
 class MainActivity2 : AppCompatActivity() {
 
