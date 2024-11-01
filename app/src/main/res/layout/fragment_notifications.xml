@@ -243,7 +243,7 @@
                 android:layout_height="wrap_content"
                 android:text="어구 반납 신청"
                 android:textColor="@color/maybeBlack"
-                android:textSize="15sp"
+                android:textSize="17sp"
                 android:textStyle="bold"
                 />
             <ImageView
@@ -279,7 +279,7 @@
                 android:layout_height="wrap_content"
                 android:text="어구 등록"
                 android:textColor="@color/maybeBlack"
-                android:textSize="15sp"
+                android:textSize="17sp"
                 android:textStyle="bold"
                 />
 
@@ -316,7 +316,7 @@
                 android:layout_height="wrap_content"
                 android:text="어구 사용 기록"
                 android:textColor="@color/maybeBlack"
-                android:textSize="15sp"
+                android:textSize="17sp"
                 android:textStyle="bold"
                 />
 
@@ -351,7 +351,7 @@
                 android:layout_height="wrap_content"
                 android:text="환급금 관리"
                 android:textColor="@color/maybeBlack"
-                android:textSize="15sp"
+                android:textSize="17sp"
                 android:textStyle="bold"
                 />
             <ImageView
@@ -384,7 +384,7 @@
                 android:layout_height="wrap_content"
                 android:text="유실 어구"
                 android:textColor="@color/maybeBlack"
-                android:textSize="15sp"
+                android:textSize="17sp"
                 android:textStyle="bold"
                 />
 

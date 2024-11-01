@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Net-flicks</string>
     <string name="title_activity_main2">MainActivity2</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">홈</string>
+    <string name="title_dashboard">지도</string>
+    <string name="title_notifications">어구</string>
     <string name="title_activity_rfidactivity">RFIDActivity</string>
 </resources>
