@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="3dp"
             android:layout_marginRight="13dp"
-            android:text="고성군 밤섬"
+            android:text=""
             android:textSize="15dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

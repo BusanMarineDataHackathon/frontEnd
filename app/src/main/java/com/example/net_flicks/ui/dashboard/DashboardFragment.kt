@@ -9,19 +9,24 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.net_flicks.R
 import com.example.net_flicks.databinding.FragmentDashboardBinding
 import com.google.android.gms.common.api.Status
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : Fragment(), OnMapReadyCallback {
 
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
@@ -29,6 +34,7 @@ class DashboardFragment : Fragment() {
     private var activeButton: Button? = null
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
+    private var googleMap: GoogleMap? = null  // GoogleMap 객체 선언
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,27 +44,47 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        // MapFragment 초기화 및 onMapReady 호출
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
+        // map_bottom_sheet.xml에 있는 whereIsHere TextView 참조
+        val whereIsHereTextView = binding.bottomSheetInclude.root.findViewById<TextView>(R.id.whereIsHere)
+
         // AutocompleteSupportFragment 초기화
         val autocompleteFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragment)
                 as AutocompleteSupportFragment
 
         // 반환할 장소 데이터 필드 설정
-        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
 
         // 장소 선택 리스너 설정
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 // Toast로 선택된 장소 정보 화면에 표시
                 Toast.makeText(requireContext(), "Place: ${place.name}", Toast.LENGTH_LONG).show()
+
+                // 선택된 장소로 지도 이동
+                val latLng = place.latLng
+                if (latLng != null) {
+                    googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+                }
+
+                // map_bottom_sheet.xml의 whereIsHere TextView의 텍스트를 변경
+                whereIsHereTextView.text = place.name
             }
 
             override fun onError(status: Status) {
-                // Toast로 오류 메시지 화면에 표시
-                Toast.makeText(requireContext(), "$status", Toast.LENGTH_LONG).show()
-                Log.e("DashboardFragment", "An error occurred: $status")
+                // 상태 코드가 "RESULT_CANCELED"인 경우 메시지를 표시하지 않음
+                if (status.statusCode != Status.RESULT_CANCELED.statusCode) {
+                    // 그 외의 에러만 Toast로 표시
+                    Toast.makeText(requireContext(), "$status", Toast.LENGTH_LONG).show()
+                    Log.e("DashboardFragment", "An error occurred: $status")
+                }
             }
         })
 
+        // 버튼 3개 활성화 및 비활성화 함수
         setupButtonListeners()
 
         // Bottom Sheet 초기화
@@ -90,6 +116,10 @@ class DashboardFragment : Fragment() {
 
 
         return root
+    }
+
+    override fun onMapReady(map: GoogleMap) { // onMapReady 메서드 추가
+        googleMap = map
     }
 
     private fun setupButtonListeners() {
@@ -169,6 +199,7 @@ class DashboardFragment : Fragment() {
 //            // 모달 바텀시트 열기 로직 추가
 //        }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
