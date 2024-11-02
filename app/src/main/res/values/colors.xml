@@ -9,4 +9,5 @@
     <color name="maybeBlack">#404040</color>
     <color name="almostBlack">#212227</color>
     <color name="rfidBgColor">#E9EAF0</color>
+    <color name="BlueButtonColor">#243E99</color>
 </resources>

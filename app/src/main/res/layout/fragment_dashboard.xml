@@ -18,13 +18,53 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <fragment android:id="@+id/autocomplete_fragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <fragment
+            android:id="@+id/autocomplete_fragment"
             android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="15dp">
+
+        <Button
+            android:id="@+id/mapButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:background="@drawable/map_rounded_corner_shape_white"
+            android:paddingHorizontal="16dp"
+            android:text="선상 집하장"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/mapButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/map_rounded_corner_shape_white"
+            android:paddingHorizontal="16dp"
+            android:text="어구 반납소"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/mapButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:background="@drawable/map_rounded_corner_shape_white"
+            android:paddingHorizontal="16dp"
+            android:text="무인 어구 회수기"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"

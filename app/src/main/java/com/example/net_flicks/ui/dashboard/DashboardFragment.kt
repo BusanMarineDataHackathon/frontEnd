@@ -6,6 +6,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -24,6 +25,8 @@ class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
+
+    private var activeButton: Button? = null
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
 
@@ -56,6 +59,8 @@ class DashboardFragment : Fragment() {
             }
         })
 
+        setupButtonListeners()
+
         // Bottom Sheet 초기화
         setupBottomSheet()
 
@@ -85,6 +90,35 @@ class DashboardFragment : Fragment() {
 
 
         return root
+    }
+
+    private fun setupButtonListeners() {
+        val buttons = listOf(binding.mapButton1, binding.mapButton2, binding.mapButton3)
+
+        buttons.forEach { button ->
+            button.setOnClickListener {
+                if (activeButton == button) {
+                    // 같은 버튼을 다시 클릭한 경우, 초기 상태로 되돌림
+                    resetButton(button)
+                    activeButton = null
+                } else {
+                    // 다른 버튼이 클릭되면 이전 버튼은 비활성화하고 현재 버튼 활성화
+                    activeButton?.let { resetButton(it) }
+                    setActiveButton(button)
+                    activeButton = button
+                }
+            }
+        }
+    }
+
+    private fun setActiveButton(button: Button) {
+        button.setBackgroundResource(R.drawable.map_rounded_corner_shape_blue)
+        button.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+    }
+
+    private fun resetButton(button: Button) {
+        button.setBackgroundResource(R.drawable.map_rounded_corner_shape_white)
+        button.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
     }
 
     private fun setupBottomSheet() {
