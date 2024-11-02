@@ -9,7 +9,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:elevation="0dp">
 
         <fragment
             android:id="@+id/map_fragment"
@@ -18,6 +19,50 @@
             android:layout_height="match_parent" />
 
     </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="150dp"
+        android:layout_marginRight="15dp"
+        android:orientation="vertical">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginBottom="13dp"
+            android:backgroundTint="@color/white"
+            android:elevation="8dp"
+            android:src="@drawable/icon1"
+            app:borderWidth="0dp"
+            app:maxImageSize="35dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginBottom="13dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/star_icon"
+            app:borderWidth="0dp"
+            app:maxImageSize="35dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/icon5"
+            app:borderWidth="0dp"
+            app:maxImageSize="35dp" />
+
+
+    </LinearLayout>
 
     <include
         android:id="@+id/bottom_sheet_include"

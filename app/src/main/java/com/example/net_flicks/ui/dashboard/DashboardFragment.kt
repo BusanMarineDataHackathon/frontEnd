@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.net_flicks.R
 import com.example.net_flicks.databinding.FragmentDashboardBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.snackbar.Snackbar
 
 class DashboardFragment : Fragment() {
 
@@ -27,6 +28,30 @@ class DashboardFragment : Fragment() {
 
         // Bottom Sheet 초기화
         setupBottomSheet()
+
+        binding.fab1.setOnClickListener { view ->
+            Snackbar.make(binding.root, "Here's a Snackbar1", Snackbar.LENGTH_LONG)
+                .setAnchorView(binding.fab1) // FAB 위에 Snackbar 표시
+                .show()
+
+            // 나중에 여기에다가 fab 아이콘 눌렀을 때 작동할 동작 구현
+        }
+
+        binding.fab2.setOnClickListener { view ->
+            Snackbar.make(binding.root, "Here's a Snackbar1", Snackbar.LENGTH_LONG)
+                .setAnchorView(binding.fab2) // FAB 위에 Snackbar 표시
+                .show()
+
+            // 나중에 여기에다가 fab 아이콘 눌렀을 때 작동할 동작 구현
+        }
+
+        binding.fab3.setOnClickListener { view ->
+            Snackbar.make(binding.root, "Here's a Snackbar1", Snackbar.LENGTH_LONG)
+                .setAnchorView(binding.fab3) // FAB 위에 Snackbar 표시
+                .show()
+
+            // 나중에 여기에다가 fab 아이콘 눌렀을 때 작동할 동작 구현
+        }
 
         return root
     }
