@@ -1,13 +1,22 @@
 package com.example.net_flicks.ui.dashboard
 
 import android.os.Bundle
+import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.net_flicks.R
 import com.example.net_flicks.databinding.FragmentDashboardBinding
+import com.google.android.gms.common.api.Status
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 
@@ -25,6 +34,27 @@ class DashboardFragment : Fragment() {
     ): View {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        // AutocompleteSupportFragment 초기화
+        val autocompleteFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragment)
+                as AutocompleteSupportFragment
+
+        // 반환할 장소 데이터 필드 설정
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
+
+        // 장소 선택 리스너 설정
+        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
+            override fun onPlaceSelected(place: Place) {
+                // Toast로 선택된 장소 정보 화면에 표시
+                Toast.makeText(requireContext(), "Place: ${place.name}", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onError(status: Status) {
+                // Toast로 오류 메시지 화면에 표시
+                Toast.makeText(requireContext(), "$status", Toast.LENGTH_LONG).show()
+                Log.e("DashboardFragment", "An error occurred: $status")
+            }
+        })
 
         // Bottom Sheet 초기화
         setupBottomSheet()
@@ -53,6 +83,7 @@ class DashboardFragment : Fragment() {
             // 나중에 여기에다가 fab 아이콘 눌렀을 때 작동할 동작 구현
         }
 
+
         return root
     }
 
@@ -68,12 +99,14 @@ class DashboardFragment : Fragment() {
         setupBottomSheetButtons()
 
         // 상태 변경 리스너 추가 (옵션)
-        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+        bottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
                     BottomSheetBehavior.STATE_EXPANDED -> {
                         // 완전히 펼쳐졌을 때
                     }
+
                     BottomSheetBehavior.STATE_COLLAPSED -> {
                         // 최소화되었을 때
                     }

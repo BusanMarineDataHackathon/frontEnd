@@ -8,6 +8,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.net_flicks.R
 import com.example.net_flicks.databinding.ActivityMain2Binding
+import com.google.android.libraries.places.api.Places
 
 class MainActivity2 : AppCompatActivity() {
 
@@ -20,6 +21,11 @@ class MainActivity2 : AppCompatActivity() {
 
         binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Google Places API 초기화
+        if (!Places.isInitialized()) {
+            Places.initialize(applicationContext, "APIKEY")
+        }
 
         val navView: BottomNavigationView = binding.navView
 
