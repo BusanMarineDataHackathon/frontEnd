@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Netflicks"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:exported="false" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -23,8 +28,6 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
-
 
         <activity
             android:name=".ui.activity.RFIDActivity"

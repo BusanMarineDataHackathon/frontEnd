@@ -11,4 +11,7 @@
     <color name="rfidBgColor">#E9EAF0</color>
     <color name="BlueButtonColor">#243E99</color>
     <color name="bottomNavBlue">#306EE7</color>
+    <color name="redInMap">#B42727</color>
+    <color name="lightRedInMap">#80E12D2D</color>
+    <color name="red">#AA0002</color>
 </resources>

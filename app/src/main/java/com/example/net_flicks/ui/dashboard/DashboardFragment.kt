@@ -1,5 +1,6 @@
 package com.example.net_flicks.ui.dashboard
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -20,6 +21,9 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PolygonOptions
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
@@ -120,6 +124,70 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) { // onMapReady 메서드 추가
         googleMap = map
+
+        // 폴리곤을 표시할 좌표 리스트 (예제 좌표)
+        val polygonCoordinates = listOf(
+            LatLng(35.1587, 129.1603), // 부산 해상 좌표 (예제)
+            LatLng(35.1557, 129.1647),
+            LatLng(35.1512, 129.1628),
+            LatLng(35.1530, 129.1584),
+            LatLng(35.1587, 129.1603) // 시작 좌표와 동일하게 닫기
+        )
+
+        // 폴리곤 옵션 설정
+        val polygonOptions = PolygonOptions()
+            .addAll(polygonCoordinates)
+            .strokeColor(ContextCompat.getColor(requireContext(), R.color.redInMap)) // 테두리 색상
+            .fillColor(ContextCompat.getColor(requireContext(), R.color.lightRedInMap)) // 채우기 색상
+            .strokeWidth(5f) // 테두리 두께
+
+        // 폴리곤 추가
+        val polygon = googleMap?.addPolygon(polygonOptions)
+
+        // 폴리곤의 중심 좌표 계산
+        val centerLat = polygonCoordinates.map { it.latitude }.average()
+        val centerLng = polygonCoordinates.map { it.longitude }.average()
+        val centerLatLng = LatLng(centerLat, centerLng)
+
+        // 동적으로 TextView 생성
+        val textView = TextView(requireContext()).apply {
+            text = "폐어구 밀집 예상 구역"
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
+            setTypeface(typeface, Typeface.BOLD)
+        }
+
+        // Fragment의 FrameLayout에 TextView 추가
+        (binding.root as ViewGroup).addView(textView)
+
+        // TextView 위치 업데이트 함수
+        fun updateTextViewPosition() {
+            val screenPosition = googleMap?.projection?.toScreenLocation(centerLatLng)
+            if (screenPosition != null) {
+                textView.x = screenPosition.x.toFloat() - textView.width / 2
+                textView.y = screenPosition.y.toFloat() - textView.height / 2
+            }
+        }
+
+        // 초기 위치 설정
+        googleMap?.setOnMapLoadedCallback {
+            updateTextViewPosition()
+        }
+
+        // 카메라 이동 리스너 설정
+        googleMap?.setOnCameraMoveListener {
+            updateTextViewPosition()
+        }
+
+//        // 중심에 텍스트를 표시할 마커 추가
+//        googleMap?.addMarker(
+//            MarkerOptions()
+//                .position(centerLatLng)
+//                .title("폐어구 밀집 예상 구역") // 원하는 텍스트
+//        )
+
+        // 지도 카메라 이동
+        googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(centerLatLng, 12f))
     }
 
     private fun setupButtonListeners() {
